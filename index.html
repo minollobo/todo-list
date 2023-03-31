@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="task-input-box">
+      <input id="taskInput" type="text" placeholder="Enter Task" />
+      <button class="add-btn"><i class="fa-solid fa-plus"></i></button>
+    </div>
+
+    <div class="task-container"></div>
+
+    <!-- SCRIPT -->
+    <script>
+      const addtaskContainer = document.querySelector(".task-input-box");
+      const taskInput = document.querySelector("#taskInput");
+      const addButton = document.querySelector(".add-btn");
+      const listContainer = document.querySelector(".task-container");
+
+      addButton.addEventListener("click", function () {
+        let task = document.createElement("div");
+        task.classList.add("task");
+
+        let li = document.createElement("li");
+        li.innerText = `${taskInput.value}`;
+        task.appendChild(li);
+
+        const checkButton = document.createElement("button");
+        checkButton.innerHTML = '<i class="fa-solid fa-check"></i>';
+        checkButton.classList.add("check-task");
+        task.appendChild(checkButton);
+
+        const delButton = document.createElement("button");
+        delButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        delButton.classList.add("del-task");
+        task.appendChild(delButton);
+
+        if (taskInput.value === "") {
+          alert("Please enter the task");
+        } else {
+          listContainer.appendChild(task);
+        }
+
+        taskInput.value = "";
+
+        checkButton.addEventListener("click", function () {
+          task.style.textDecoration = "line-through";
+        });
+
+        delButton.addEventListener("click", function (e) {
+          let target = e.target;
+          target.parentElement.parentElement.remove();
+        });
+      });
+    </script>
+  </body>
+</html>
